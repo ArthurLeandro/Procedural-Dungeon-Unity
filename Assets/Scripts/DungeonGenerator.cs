@@ -4,8 +4,6 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
-
-[ExecuteInEditMode]
 public class DungeonGenerator : MonoBehaviour
 {
 	[Header("Prefabs")]
@@ -22,13 +20,15 @@ public class DungeonGenerator : MonoBehaviour
 	[SerializeField] [Range(0, 100)] int m_doorPercentage = 25;
 	Transform m_from, m_to, m_tileRoot, m_container;
 	public List<Tile> m_generatedTiles;
-	List<Connector> m_availableConnectors;
+	public List<Connector> m_availableConnectors;
 	YieldInstruction waitForSeconds;
-
+	int attempts = 0;
+	int maxAttempts = 50;
 	public bool m_useBoxColliders;
 
 	void Start()
 	{
+		waitForSeconds = new WaitForSeconds(m_constructionDelay);
 		m_generatedTiles = new List<Tile>();
 		m_availableConnectors = new List<Connector>();
 		GenerateDungeon();
@@ -37,12 +37,12 @@ public class DungeonGenerator : MonoBehaviour
 
 	void OnDestroy()
 	{
-		Clean();
-		m_generatedTiles.Clear();
-		for (int i = 0; i < transform.childCount; i++)
-		{
-			DestroyImmediate(transform.GetChild(0).gameObject);
-		}
+		// Clean();
+		// m_generatedTiles.Clear();
+		// for (int i = 0; i < transform.childCount; i++)
+		// {
+		// 	DestroyImmediate(transform.GetChild(0).gameObject);
+		// }
 	}
 
 	void Setup()
@@ -67,10 +67,12 @@ public class DungeonGenerator : MonoBehaviour
 		GameObject goContainer = new GameObject("Main Path");
 		m_container = goContainer.transform;
 		m_container.SetParent(transform);
-		m_tileRoot = m_to = GenerateStartingTile();
-		for (int i = 0; i < m_mainLength; i++)
+		m_tileRoot = GenerateStartingTile();
+		m_to = m_tileRoot;
+		for (int i = 0; i < m_mainLength - 1; i++)
 		{
-			yield return waitForSeconds;
+			Debug.Log($"Tentativa ${i}");
+			yield return new WaitForSeconds(m_constructionDelay);
 			m_from = m_to;
 			m_to = CreateTile();
 			ConnectTiles();
@@ -85,8 +87,9 @@ public class DungeonGenerator : MonoBehaviour
 					m_availableConnectors.Add(conn);
 			}
 		}
-		for (int i = 0; i < m_numbersOfBranches; i++)
+		for (int i = 0; i < m_numbersOfBranches - 1; i++)
 		{
+			Debug.Log($"Rodando a branch ${i}");
 			if (m_availableConnectors.Count > 0)
 			{
 				goContainer = new GameObject($"Branch { i + 1 }");
@@ -98,7 +101,8 @@ public class DungeonGenerator : MonoBehaviour
 				m_to = m_tileRoot;
 				for (int b = 0; b < m_branchLength; b++)
 				{
-					yield return waitForSeconds;
+					attempts = 0;
+					yield return new WaitForSeconds(m_constructionDelay);
 					m_from = m_to;
 					m_to = CreateTile();
 					ConnectTiles();
@@ -159,8 +163,6 @@ public class DungeonGenerator : MonoBehaviour
 		}
 	}
 
-	int attempts = 0;
-	int maxAttempts = 50;
 	private void CollisionCheck()
 	{
 		BoxCollider box = m_to.GetComponent<BoxCollider>();
@@ -245,7 +247,9 @@ public class DungeonGenerator : MonoBehaviour
 				}
 			}
 			else
+			{
 				attempts = 0;
+			}
 		}
 	}
 
@@ -363,12 +367,8 @@ public class DungeonGenerator : MonoBehaviour
 		{
 			if (transform.childCount > 0)
 			{
-
 				m_generatedTiles.Clear();
-				for (int i = 0; i < transform.childCount; i++)
-				{
-					DestroyImmediate(transform.GetChild(0).gameObject);
-				}
+				DestroyImmediate(transform.GetChild(0).gameObject);
 			}
 		}
 		catch (Exception e)
