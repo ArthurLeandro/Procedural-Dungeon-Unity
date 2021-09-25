@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6465404191058588160}
   - component: {fileID: 6640055341812068586}
   - component: {fileID: 4979271986500056491}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: Doorframe
   m_TagString: Untagged
   m_Icon: {fileID: 0}

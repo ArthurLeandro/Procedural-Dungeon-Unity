@@ -14,8 +14,8 @@ public class DungeonGenerator : MonoBehaviour
 	public GameObject[] m_doorPrefabs;
 	[Header("Generation Tweeks")]
 	[SerializeField] [Range(0, 1f)] float m_constructionDelay = 0f;
-	[SerializeField] [Range(1, 100)] int m_mainLength = 10;
-	[SerializeField] [Range(0, 50)] int m_branchLength = 10;
+	[SerializeField] [Range(1, 1000)] int m_mainLength = 10;
+	[SerializeField] [Range(0, 250)] int m_branchLength = 10;
 	[SerializeField] [Range(0, 100)] int m_numbersOfBranches = 25;
 	[SerializeField] [Range(0, 100)] int m_doorPercentage = 25;
 	Transform m_from, m_to, m_tileRoot, m_container;
@@ -35,14 +35,12 @@ public class DungeonGenerator : MonoBehaviour
 		Setup();
 	}
 
-	void OnDestroy()
+	void Update()
 	{
-		// Clean();
-		// m_generatedTiles.Clear();
-		// for (int i = 0; i < transform.childCount; i++)
-		// {
-		// 	DestroyImmediate(transform.GetChild(0).gameObject);
-		// }
+		if (Input.GetKeyDown(KeyCode.R))
+		{
+			UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+		}
 	}
 
 	void Setup()
