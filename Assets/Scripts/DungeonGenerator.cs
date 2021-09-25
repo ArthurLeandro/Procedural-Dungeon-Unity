@@ -12,6 +12,7 @@ public class DungeonGenerator : MonoBehaviour
   public GameObject[] m_prefabTiles;
 
   Transform m_from, m_to;
+  public List<Tile> m_generatedTiles = new List<Tile>(); 
 
   void Start(){
   }
@@ -40,15 +41,20 @@ public class DungeonGenerator : MonoBehaviour
 
   private void ConnectTiles(){
     Transform connectFrom = GetRandomConnector(m_from);
-    Transform connectTo = GetRandomConnector(m_to);
-    if(connectTo != null && connectFrom != null){
-      connectTo.SetParent(connectFrom);
-      m_to.SetParent(connectTo);
-      connectTo.localPosition = Vector3.zero;
-      connectTo.localRotation = Quaternion.identity;
-      connectTo.Rotate(0,180f,0);
-      m_to.SetParent(transform);
-      connectTo.SetParent(m_to.Find("Connectors"));
+    if(connectFrom != null){
+      Transform connectTo = GetRandomConnector(m_to);
+      if(connectTo != null){
+        if(connectTo != null && connectFrom != null){
+          connectTo.SetParent(connectFrom);
+          m_to.SetParent(connectTo);
+          connectTo.localPosition = Vector3.zero;
+          connectTo.localRotation = Quaternion.identity;
+          connectTo.Rotate(0,180f,0);
+          m_to.SetParent(transform);
+          connectTo.SetParent(m_to.Find("Connectors"));
+          m_generatedTiles.Last().connector = connectFrom.GetComponent<Connector>();
+        }
+      }
     }
   }
 
@@ -73,6 +79,8 @@ public class DungeonGenerator : MonoBehaviour
     int index = UnityEngine.Random.Range(0, m_prefabTiles.Length);
     GameObject tile = Instantiate(m_prefabTiles[index], Vector3.zero, Quaternion.identity) as GameObject;
     tile.name = m_prefabTiles[index].name;
+    Transform origin = m_generatedTiles[m_generatedTiles.FindIndex(t => t.tile == m_from)].tile;
+    m_generatedTiles.Add(new Tile(tile.transform, origin));
     return tile.transform;
   }
 
@@ -83,6 +91,7 @@ public class DungeonGenerator : MonoBehaviour
     float yRotation = UnityEngine.Random.Range(0,4)*90f;
     startingTile.transform.Rotate(0,yRotation,0);
     //startingTile.transform.SetParent(this.transform);
+    m_generatedTiles.Add(new Tile(startingTile.transform, null));
     return startingTile.transform;
   }
 
