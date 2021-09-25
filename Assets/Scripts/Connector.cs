@@ -5,11 +5,11 @@ using UnityEngine;
 public class Connector : MonoBehaviour
 {
 	[SerializeField] Vector2 size;
-        public bool isConnected = false;
+	public bool isConnected = false;
 
 	void OnDrawGizmos()
 	{
-		Gizmos.color = Color.cyan;
+		Gizmos.color = !isConnected ? Color.red : Color.cyan;
 		Vector3 halfSize = size * .5f;
 		Vector3 offset = transform.position + transform.up * halfSize.y;
 		Vector3 top = transform.up * size.x;
