@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5190977969085876898}
   - component: {fileID: 3955557066147961563}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Connector (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 4, y: 4}
+  isConnected: 0
 --- !u!1 &5056486300960270502
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +56,7 @@ GameObject:
   - component: {fileID: 8928341683254159503}
   - component: {fileID: 820581697677207878}
   - component: {fileID: 8576965450266843750}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Hall I
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,10 +132,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8928341683254159503}
     m_Modifications:
+    - target: {fileID: 3759236876660112067, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}
       propertyPath: m_Name
       value: Connectors
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 6262690490184309213, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}

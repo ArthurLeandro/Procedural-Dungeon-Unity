@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5224916624072180273}
   - component: {fileID: 5224464804226632630}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Connector (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 4, y: 4}
+  isConnected: 0
 --- !u!1 &3222029137371609700
 GameObject:
   m_ObjectHideFlags: 0
@@ -54,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2506525186298631510}
   - component: {fileID: 7987384754291400376}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Connector (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 4, y: 4}
+  isConnected: 0
 --- !u!1 &7155872033760022253
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +101,7 @@ GameObject:
   - component: {fileID: 4570553781801726406}
   - component: {fileID: 6168998491404741860}
   - component: {fileID: 660080673205834363}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Hall X
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2637255903796836477}
   - component: {fileID: 4837555450575933961}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Connector (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,6 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 4, y: 4}
+  isConnected: 0
 --- !u!1001 &652581309601344848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219,10 +222,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4570553781801726406}
     m_Modifications:
+    - target: {fileID: 3759236876660112067, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}
       propertyPath: m_Name
       value: Connectors
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 6262690490184309213, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}

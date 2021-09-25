@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Connector : MonoBehaviour
 {
-	[SerializeField] Vector2 size;
+	public Vector2 size;
 	public bool isConnected = false;
 
 	void OnDrawGizmos()

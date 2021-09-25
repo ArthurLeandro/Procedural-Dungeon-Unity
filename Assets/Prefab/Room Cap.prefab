@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 8448085756602375589}
   - component: {fileID: 1032669425675125644}
   - component: {fileID: 6012757777615825185}
-  m_Layer: 0
+  - component: {fileID: 2766214279175392157}
+  m_Layer: 27
   m_Name: Room Cap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,6 +81,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2766214279175392157
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256390925260851326}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 12, y: 5, z: 13}
+  m_Center: {x: 0, y: 2.5, z: -0.5}
 --- !u!1001 &4962407934404474428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87,10 +101,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8448085756602375589}
     m_Modifications:
+    - target: {fileID: 3759236876660112067, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}
       propertyPath: m_Name
       value: Connectors
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 6262690490184309213, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}

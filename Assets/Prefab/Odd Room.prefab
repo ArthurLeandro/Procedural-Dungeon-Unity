@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8687862493526471525}
   - component: {fileID: 981630728332871779}
   - component: {fileID: 4825555033651598267}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Odd Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2288143688071501622}
   - component: {fileID: 5620980439008572595}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Connector (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,6 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 4, y: 4}
+  isConnected: 0
 --- !u!1 &7705266707729844914
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7162897770311362250}
   - component: {fileID: 6301094077586493419}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Connector (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,6 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 4, y: 4}
+  isConnected: 0
 --- !u!1001 &1776002688813848568
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -175,10 +177,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8687862493526471525}
     m_Modifications:
+    - target: {fileID: 3759236876660112067, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}
       propertyPath: m_Name
       value: Connectors
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 6262690490184309213, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}

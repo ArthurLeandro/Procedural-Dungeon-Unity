@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7654364780788587218}
   - component: {fileID: 5411692133468878581}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Connector (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   size: {x: 4, y: 4}
+  isConnected: 0
 --- !u!1 &6087605750311117741
 GameObject:
   m_ObjectHideFlags: 0
@@ -55,7 +56,7 @@ GameObject:
   - component: {fileID: 1577837089332819145}
   - component: {fileID: 3537627054954464714}
   - component: {fileID: 7795439908079983283}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: Hall Slope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,10 +132,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1577837089332819145}
     m_Modifications:
+    - target: {fileID: 3759236876660112067, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
+      objectReference: {fileID: 0}
     - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}
       propertyPath: m_Name
       value: Connectors
+      objectReference: {fileID: 0}
+    - target: {fileID: 5448709692631804996, guid: 706209480bda5a28dbb724dc7724fe28,
+        type: 3}
+      propertyPath: m_Layer
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 6262690490184309213, guid: 706209480bda5a28dbb724dc7724fe28,
         type: 3}
