@@ -72,17 +72,20 @@ public class DungeonGenerator : MonoBehaviour
 		m_tileRoot = GenerateStartingTile();
 		m_to = m_tileRoot;
 		m_state = DungeonStates.GENERATING_MAIN;
-		for (int i = 0; i < m_mainLength - 1; i++)
+		while (m_generatedTiles.Count < m_mainLength)
 		{
-#if UNITY_EDITOR
-			Debug.Log($"Tentativa ${i}");
-#endif
 			yield return new WaitForSeconds(m_constructionDelay);
 			m_from = m_to;
-			m_to = CreateTile();
+			if (m_generatedTiles.Count != m_mainLength - 1)
+			{
+				m_to = CreateTile();
+			}
+			else
+			{
+				m_to = GenerateEndingTile();
+			}
 			ConnectTiles();
 			CollisionCheck();
-			if (attempts >= maxAttempts) break;
 		}
 		foreach (Connector conn in m_container.GetComponentsInChildren<Connector>())
 		{
@@ -251,7 +254,14 @@ public class DungeonGenerator : MonoBehaviour
 				//retry
 				if (m_from != null)
 				{
-					m_to = CreateTile();
+					if (m_generatedTiles.Count != m_mainLength - 1)
+					{
+						m_to = CreateTile();
+					}
+					else
+					{
+						m_to = GenerateEndingTile();
+					}
 					ConnectTiles();
 					CollisionCheck();
 				}
@@ -348,6 +358,15 @@ public class DungeonGenerator : MonoBehaviour
 		startingTile.transform.Rotate(0, yRotation, 0);
 		//startingTile.transform.SetParent(this.transform);
 		startingTile.name = "startingTile";
+		m_generatedTiles.Add(new Tile(startingTile.transform, null));
+		return startingTile.transform;
+	}
+
+	private Transform GenerateEndingTile()
+	{
+		int index = UnityEngine.Random.Range(0, m_exitPrefabs.Length);
+		GameObject startingTile = Instantiate(m_exitPrefabs[index], Vector3.zero, Quaternion.identity, m_container) as GameObject;
+		startingTile.name = "Ending Tile";
 		m_generatedTiles.Add(new Tile(startingTile.transform, null));
 		return startingTile.transform;
 	}
