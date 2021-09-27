@@ -24,6 +24,8 @@ public class DungeonGenerator : MonoBehaviour
 	YieldInstruction waitForSeconds;
 	int attempts = 0;
 	int maxAttempts = 50;
+	public DungeonStates m_state = DungeonStates.INACTIVE;
+
 	public bool m_useBoxColliders;
 
 	void Start()
@@ -53,11 +55,13 @@ public class DungeonGenerator : MonoBehaviour
 		// 		DestroyImmediate(transform.GetChild(0).gameObject);
 		// 	}
 		// });
+		DungeonGeneratorEvents.OnGettingNewGenerator += GettinThis;
 	}
 
 	void Clean()
 	{
 		// DungeonGeneratorEvents.OnFinishGeneratingNewDungeon -= (() => m_generatedTiles.Clear());
+		DungeonGeneratorEvents.OnGettingNewGenerator -= GettinThis;
 	}
 
 	IEnumerator DungeonBuild()
@@ -67,9 +71,12 @@ public class DungeonGenerator : MonoBehaviour
 		m_container.SetParent(transform);
 		m_tileRoot = GenerateStartingTile();
 		m_to = m_tileRoot;
+		m_state = DungeonStates.GENERATING_MAIN;
 		for (int i = 0; i < m_mainLength - 1; i++)
 		{
+#if UNITY_EDITOR
 			Debug.Log($"Tentativa ${i}");
+#endif
 			yield return new WaitForSeconds(m_constructionDelay);
 			m_from = m_to;
 			m_to = CreateTile();
@@ -85,9 +92,12 @@ public class DungeonGenerator : MonoBehaviour
 					m_availableConnectors.Add(conn);
 			}
 		}
+		m_state = DungeonStates.GENERATING_BRANCHES;
 		for (int i = 0; i < m_numbersOfBranches - 1; i++)
 		{
+#if UNITY_EDITOR
 			Debug.Log($"Rodando a branch ${i}");
+#endif
 			if (m_availableConnectors.Count > 0)
 			{
 				goContainer = new GameObject($"Branch { i + 1 }");
@@ -110,9 +120,11 @@ public class DungeonGenerator : MonoBehaviour
 			}
 			else break;
 		}
+		m_state = DungeonStates.CLEANING_UP;
 		CleanUpBoxColliders();
 		BlockedPassages();
 		SpawnDoors();
+		m_state = DungeonStates.COMPLETED;
 	}
 
 	void SpawnDoors()
@@ -375,12 +387,16 @@ public class DungeonGenerator : MonoBehaviour
 		}
 	}
 
+	private DungeonGenerator GettinThis() => this;
+
 }
 
 public class DungeonGeneratorEvents
 {
 	public static Action OnGenerateNewDungeon;
 	public static Action OnFinishGeneratingNewDungeon;
+	public static Func<DungeonGenerator> OnGettingNewGenerator;
 	public static void CallOnGenerateNewDungeon() => OnGenerateNewDungeon?.Invoke();
 	public static void CallOnFinishGeneratingDungeon() => OnFinishGeneratingNewDungeon?.Invoke();
+	public static DungeonGenerator CallOnGerttingNewGenerator() => OnGettingNewGenerator?.Invoke();
 }
